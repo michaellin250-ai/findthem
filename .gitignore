@@ -1,0 +1,15 @@
+## Frontend
+client/node_modules/
+client/dist/
+client/.env
+
+## Backend
+server/venv/
+server/cache/cases.json
+server/__pycache__/
+server/*.pyc
+server/.env
+
+## General
+.DS_Store
+*.log
