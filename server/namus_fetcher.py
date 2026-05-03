@@ -234,8 +234,8 @@ def enrich_coordinates(cases):
     for case in cases:
         coords = location_map.get(case.get("_geoQuery", ""))
         if coords:
-            case["lat"] = coords["lat"] + rng.uniform(-0.012, 0.012)
-            case["lng"] = coords["lng"] + rng.uniform(-0.012, 0.012)
+            case["lat"] = coords["lat"] + rng.uniform(-0.04, 0.04)
+            case["lng"] = coords["lng"] + rng.uniform(-0.04, 0.04)
         case.pop("_geoQuery", None)
 
     return cases

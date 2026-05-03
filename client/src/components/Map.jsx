@@ -54,7 +54,7 @@ export default function Map({ cases, onCaseSelect, selectedCase }) {
       data: casesToGeoJSON([]),
       cluster: true,
       clusterMaxZoom: 11,
-      clusterRadius: 45,
+      clusterRadius: 35,
     });
 
     // Cluster circle
