@@ -5,7 +5,6 @@ client/.env
 
 ## Backend
 server/venv/
-server/cache/cases.json
 server/__pycache__/
 server/*.pyc
 server/.env

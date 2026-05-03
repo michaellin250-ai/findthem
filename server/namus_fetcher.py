@@ -9,6 +9,7 @@ Results are cached to a local JSON file and refreshed every 24 hours.
 """
 
 import json
+import random
 import time
 import logging
 from datetime import datetime, timedelta
@@ -226,11 +227,15 @@ def enrich_coordinates(cases):
         if i % 50 == 0:
             logger.info(f"  Geocoded {i}/{total} locations...")
 
+    # Many cases share one geocoded coordinate (city center). Add a small
+    # deterministic jitter (~1km) per case so they spread out instead of
+    # stacking into a single dot at max zoom.
+    rng = random.Random(42)
     for case in cases:
         coords = location_map.get(case.get("_geoQuery", ""))
         if coords:
-            case["lat"] = coords["lat"]
-            case["lng"] = coords["lng"]
+            case["lat"] = coords["lat"] + rng.uniform(-0.012, 0.012)
+            case["lng"] = coords["lng"] + rng.uniform(-0.012, 0.012)
         case.pop("_geoQuery", None)
 
     return cases
