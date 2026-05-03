@@ -12,6 +12,7 @@ import { useCases, filterCases } from './hooks/useCases';
 const DEFAULT_FILTERS = {
   state: '',
   gender: 'all',
+  race: '',
   ageMin: 0,
   ageMax: 100,
   dateFrom: '',

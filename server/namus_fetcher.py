@@ -196,6 +196,11 @@ def parse_case(raw, state_abbr):
         "name": full_name,
         "age": age_display,
         "gender": raw.get("gender") or "Unknown",
+        "race": (
+            ", ".join(raw["raceEthnicity"])
+            if isinstance(raw.get("raceEthnicity"), list)
+            else (raw.get("raceEthnicity") or "Unknown")
+        ),
         "dateMissing": date_missing,
         "city": city,
         "county": county,

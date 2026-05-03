@@ -32,7 +32,7 @@ export function useCases() {
 }
 
 export function filterCases(cases, filters) {
-  const { state, ageMin, ageMax, gender, dateFrom, dateTo } = filters;
+  const { state, ageMin, ageMax, gender, race, dateFrom, dateTo } = filters;
 
   return cases.filter(c => {
     if (state && c.state !== state) return false;
@@ -42,6 +42,8 @@ export function filterCases(cases, filters) {
       if (gender === 'male' && g !== 'male') return false;
       if (gender === 'female' && g !== 'female') return false;
     }
+
+    if (race && !(c.race || 'Unknown').includes(race)) return false;
 
     // Age filter
     if (ageMin !== undefined || ageMax !== undefined) {

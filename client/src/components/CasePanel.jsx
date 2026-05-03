@@ -119,6 +119,7 @@ export default function CasePanel({ caseData, onClose }) {
           <div className="mt-4 -mx-0">
             <InfoRow label="Age at Disappearance" value={caseData.age} />
             <InfoRow label="Gender" value={caseData.gender} />
+            <InfoRow label="Race / Ethnicity" value={caseData.race || 'Unknown'} />
             <InfoRow label="Date Missing" value={caseData.dateMissing} />
             <InfoRow label="Last Known Location" value={location} />
             <InfoRow label="NamUs Case #" value={caseData.id} />

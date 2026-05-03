@@ -38,14 +38,28 @@ function FilterSection({ title, children }) {
   );
 }
 
+const RACE_OPTIONS = [
+  'White / Caucasian',
+  'Black / African American',
+  'Hispanic / Latino',
+  'Asian',
+  'American Indian / Alaska Native',
+  'Native Hawaiian / Other Pacific Islander',
+  'Multiple Races',
+  'Other',
+  'Uncertain',
+  'Unknown',
+];
+
 export default function Sidebar({ open, filters, onChange }) {
-  const { state, ageMin, ageMax, gender, dateFrom, dateTo } = filters;
+  const { state, ageMin, ageMax, gender, race, dateFrom, dateTo } = filters;
 
   const update = (key, val) => onChange({ ...filters, [key]: val });
 
   const activeCount = [
     state,
     gender && gender !== 'all',
+    race,
     ageMin !== 0,
     ageMax !== 100,
     dateFrom,
@@ -75,7 +89,7 @@ export default function Sidebar({ open, filters, onChange }) {
         </div>
         {activeCount > 0 && (
           <button
-            onClick={() => onChange({ state: '', gender: 'all', ageMin: 0, ageMax: 100, dateFrom: '', dateTo: '' })}
+            onClick={() => onChange({ state: '', gender: 'all', race: '', ageMin: 0, ageMax: 100, dateFrom: '', dateTo: '' })}
             className="text-xs text-slate-500 hover:text-amber-400 transition-colors"
           >
             Clear all
@@ -117,6 +131,20 @@ export default function Sidebar({ open, filters, onChange }) {
               </button>
             ))}
           </div>
+        </FilterSection>
+
+        <FilterSection title="Race / Ethnicity">
+          <select
+            value={race || ''}
+            onChange={e => update('race', e.target.value)}
+            className="w-full bg-white/5 border text-sm text-slate-200 rounded-lg px-3 py-2.5 appearance-none cursor-pointer transition-colors hover:border-amber-500/30 focus:outline-none focus:border-amber-500/50"
+            style={{ borderColor: 'rgba(255,255,255,0.1)' }}
+          >
+            <option value="">All Races</option>
+            {RACE_OPTIONS.map(r => (
+              <option key={r} value={r}>{r}</option>
+            ))}
+          </select>
         </FilterSection>
 
         <FilterSection title={`Age Range — ${ageMin}–${ageMax === 100 ? '100+' : ageMax}`}>
