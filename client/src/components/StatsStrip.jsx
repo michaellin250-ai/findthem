@@ -2,13 +2,13 @@ import { useMemo } from 'react';
 
 export default function StatsStrip({ allCases, visibleCases, loading }) {
   const topState = useMemo(() => {
-    if (!allCases.length) return null;
+    if (!visibleCases.length) return null;
     const counts = {};
-    allCases.forEach(c => {
+    visibleCases.forEach(c => {
       counts[c.stateFull || c.state] = (counts[c.stateFull || c.state] || 0) + 1;
     });
     return Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
-  }, [allCases]);
+  }, [visibleCases]);
 
   const stats = [
     {
@@ -18,7 +18,7 @@ export default function StatsStrip({ allCases, visibleCases, loading }) {
     },
     {
       label: 'In Current View',
-      value: loading ? '—' : visibleCases.toLocaleString(),
+      value: loading ? '—' : visibleCases.length.toLocaleString(),
       sub: 'after filters',
     },
     {

@@ -79,7 +79,7 @@ export default function App() {
       {/* Stats strip — below navbar */}
       <StatsStrip
         allCases={allCases}
-        visibleCases={visibleCases.length}
+        visibleCases={visibleCases}
         loading={loading}
       />
 
